@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+	<ion-title>Pesquisarrrr Cidades</ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">
+        <span ion-text color="primary" >Cancel</span>        
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding>	
+	<ion-searchbar ></ion-searchbar>
+  <ion-list inset>
+  <button ion-item *ngFor="let item of items" (click)="itemSelected(item)">
+    {{ item }}
+  </button> 
+</ion-list>
+</ion-content>

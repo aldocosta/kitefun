@@ -1,15 +1,28 @@
 <ion-menu [content]="content">
   <ion-header>
     <ion-toolbar>
-      <ion-title>Menu</ion-title>
+      <ion-title>
+      <img src="./assets/kite.svg" alt="" style='qidth:35px;height:35px'>
+      Menu</ion-title>
     </ion-toolbar>
   </ion-header>
 
   <ion-content>
     <ion-list>
       <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-        {{p.title}}
+          <ion-icon name="more"></ion-icon> {{p.title}}
       </button>
+    </ion-list>
+    <ion-list>
+      <button menuClose ion-item (click)="openPage(p)">
+          <ion-icon name="cog"></ion-icon> Configurações
+      </button>
+      <button menuClose ion-item (click)="openPage(p)">
+          <ion-icon name="md-chatboxes"></ion-icon> Enviar comentário
+      </button>
+      <button menuClose ion-item (click)="openPage(p)">
+          <ion-icon name="md-share"></ion-icon> Compartilhar app
+      </button>      
     </ion-list>
   </ion-content>
 

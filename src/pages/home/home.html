@@ -1,18 +1,55 @@
 <ion-header>
   <ion-navbar>
     <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
+      <!--<ion-icon name="menu"></ion-icon>-->
+      <!--<img src="./assets/kite.svg" alt="" style='width:35px;height:35px;background-color: white;border: 1px solid black'>-->
+      <img src="./assets/kite.svg" alt="" style='width:35px;height:35px;'>
     </button>
-    <ion-title>Home</ion-title>
-  </ion-navbar>
+    <ion-title>{{longitude}} KITE RUNNING</ion-title>  
+  </ion-navbar>  
 </ion-header>
+<ion-content>
+    <ion-fab top right edge>
+    <button ion-fab mini (click)='showModalSearchCities()'><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
+    <ion-card>
+      <ion-card-header>
+        <ion-icon color='danger' name="help-buoy"></ion-icon> Informativo
+      </ion-card-header>
+      <ion-card-content>
+        Parece que não há nenhuma cidade ou localização adicionada aos seus favoritos, deseja adicionar alguma das cidades abaixo?
+        <ion-slides pager>
+          <ion-slide>
+            <div style="height: 220px">
+              <img src="./assets/city.jpg" alt="">
+              <ion-item>
+              <ion-label color='primary' style='font-size: 15pt'>Santos</ion-label>
+              <ion-checkbox color="dark" checked="false"></ion-checkbox>
+            </ion-item>
+            </div>
+          </ion-slide>        
+          <ion-slide>
+            <div style="height: 220px">
+              <img src="./assets/rio.jpg" alt="">
+              <ion-item>
+              <ion-label color='primary' style='font-size: 15pt'>Rio de Janeiro</ion-label>
+              <ion-checkbox color="dark" checked="false"></ion-checkbox>
+            </ion-item>
+            </div>
+          </ion-slide>
+          <ion-slide>
+            <div style="height: 220px">
+              <img src="./assets/saopaulo.jpg" alt="">
+              <ion-item>
+              <ion-label color='primary' style='font-size: 15pt'>São Paulo</ion-label>
+              <ion-checkbox color="dark" checked="false"></ion-checkbox>
+            </ion-item>
+            </div>
+          </ion-slide>
+          
+        </ion-slides>
 
-<ion-content padding>
-  <h3>Ionic Menu Starter</h3>
-
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
-
-  <button ion-button secondary menuToggle>Toggle Menu</button>
+        <button ion-button block (click)='doSome()'>Call</button>
+        </ion-card-content>
+    </ion-card>
 </ion-content>
