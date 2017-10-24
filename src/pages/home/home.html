@@ -1,18 +1,66 @@
 <ion-header>
   <ion-navbar>
     <button ion-button menuToggle>
-      <!--<ion-icon name="menu"></ion-icon>-->
-      <!--<img src="./assets/kite.svg" alt="" style='width:35px;height:35px;background-color: white;border: 1px solid black'>-->
-      <img src="./assets/kite.svg" alt="" style='width:35px;height:35px;'>
+      <ion-icon name="menu"></ion-icon>            
     </button>
-    <ion-title>{{longitude}} KITE RUNNING</ion-title>  
+    <ion-title> <img src="./assets/kite.svg" alt="" style='width:35px;height:35px;'> KITE RUNNING</ion-title>  
   </ion-navbar>  
 </ion-header>
 <ion-content>
-    <ion-fab top right edge>
+  <ion-fab top right edge>
     <button ion-fab mini (click)='showModalSearchCities()'><ion-icon name="add"></ion-icon></button>
   </ion-fab>
-    <ion-card>
+  <ion-card>
+
+  <img src="./assets/city.jpg">
+  <ion-badge item-end>Santos</ion-badge>      
+  
+
+ <ion-item>
+    <ion-icon name="" item-start large>
+      <img [src]="urlicon" alt="" style='width: 30px;'>      
+    </ion-icon>    
+    <h2>Nublado</h2>
+    <p>Max:{{ temp_max }}º, Min:{{ temp_min }}º</p>
+  </ion-item>
+
+  <ion-item>
+    <ion-icon name="ios-speedometer" color='primary' item-left large ></ion-icon>     
+    <h2>Velocidade do Vento</h2>
+    <p>{{speed}} KM/H</p>
+    <p>
+       <ion-icon name="compass"></ion-icon> O vento sopra na direção Sul
+    </p>
+  </ion-item>
+
+<ion-card>
+
+  <ion-card-header>
+     <ion-icon color='primary' name="information-circle">       
+     </ion-icon> Sugestão KITE
+  </ion-card-header>
+  <ion-card-content>    
+    {{message}}
+  </ion-card-content>
+
+</ion-card>  
+
+  <ion-item style='display:none'>
+    <span item-left>18 min</span>
+    <span item-left>(2.6 mi)</span>
+    <button ion-button icon-left clear item-end>
+      <ion-icon name="navigate"></ion-icon>
+      Start
+    </button>
+  </ion-item>
+
+</ion-card>
+
+ <ion-infinite-scroll (ionInfinite)="loadInfo($event)">
+   <ion-infinite-scroll-content></ion-infinite-scroll-content>
+ </ion-infinite-scroll>
+
+    <ion-card [hidden]='true'>
       <ion-card-header>
         <ion-icon color='danger' name="help-buoy"></ion-icon> Informativo
       </ion-card-header>

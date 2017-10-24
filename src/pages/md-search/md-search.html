@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-	<ion-title>Pesquisarrrr Cidades</ion-title>
+	<ion-title>Pesquisar Cidades</ion-title>
     <ion-buttons start>
       <button ion-button (click)="dismiss()">
         <span ion-text color="primary" >Cancel</span>        
@@ -9,10 +9,13 @@
   </ion-toolbar>
 </ion-header>
 <ion-content padding>	
-	<ion-searchbar ></ion-searchbar>
-  <ion-list inset>
-  <button ion-item *ngFor="let item of items" (click)="itemSelected(item)">
-    {{ item }}
-  </button> 
-</ion-list>
+	<ion-searchbar  
+  (ionInput)="inputEvent($event)"
+   ></ion-searchbar>  
+   {{valor}}
+    <ion-list inset>
+      <button ion-item *ngFor="let item of itemsFilter" (click)="itemSelected(item)">
+        {{ item }}
+      </button> 
+    </ion-list>
 </ion-content>

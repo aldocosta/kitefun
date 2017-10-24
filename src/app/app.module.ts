@@ -13,6 +13,7 @@ import { EstadoServices } from '../pages/services/estado-services';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Geolocation } from '@ionic-native/geolocation';
+import { WeatherapiProvider } from '../providers/weatherapi/weatherapi';
 
 @NgModule({
   declarations: [
@@ -36,10 +37,10 @@ import { Geolocation } from '@ionic-native/geolocation';
   providers: [
     StatusBar,
     SplashScreen,
-    EstadoServices,
-    
+    EstadoServices,    
     Geolocation,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    WeatherapiProvider
   ]
 })
 export class AppModule {}
