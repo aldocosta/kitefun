@@ -10,94 +10,55 @@
   <ion-fab top right edge>
     <button ion-fab mini (click)='showModalSearchCities()'><ion-icon name="add"></ion-icon></button>
   </ion-fab>
-  <ion-card>
-
-  <img src="./assets/city.jpg">
-  <ion-badge item-end>Santos</ion-badge>      
-  
-
- <ion-item>
-    <ion-icon name="" item-start large>
-      <img [src]="urlicon" alt="" style='width: 30px;'>      
-    </ion-icon>    
-    <h2>Nublado</h2>
-    <p>Max:{{ temp_max }}º, Min:{{ temp_min }}º</p>
-  </ion-item>
-
-  <ion-item>
-    <ion-icon name="ios-speedometer" color='primary' item-left large ></ion-icon>     
-    <h2>Velocidade do Vento</h2>
-    <p>{{speed}} KM/H</p>
-    <p>
-       <ion-icon name="compass"></ion-icon> O vento sopra na direção Sul
-    </p>
-  </ion-item>
-
 <ion-card>
-
-  <ion-card-header>
-     <ion-icon color='primary' name="information-circle">       
-     </ion-icon> Sugestão KITE
-  </ion-card-header>
-  <ion-card-content>    
-    {{message}}
-  </ion-card-content>
-
-</ion-card>  
-
-  <ion-item style='display:none'>
-    <span item-left>18 min</span>
-    <span item-left>(2.6 mi)</span>
-    <button ion-button icon-left clear item-end>
-      <ion-icon name="navigate"></ion-icon>
-      Start
-    </button>
-  </ion-item>
+  <div *ngIf='!isfirsttime' (tap)='tapevent($event)'>
+    <img [src]="urlimg">
+    <ion-badge item-end>{{cidade}}</ion-badge>
+    <ion-item>
+      <ion-icon name="" item-start large>
+        <img [src]="urlicon" alt="" style='width: 30px;'>      
+      </ion-icon>    
+      <h2>{{main | uppercase}}</h2>
+      <p>Max:{{ temp_max }}º, Min:{{ temp_min }}º</p>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="ios-speedometer" color='primary' item-left large ></ion-icon>     
+      <h2>Velocidade do Vento</h2>
+      <p>{{speed}} KM/H</p>
+      <p>
+         <ion-icon name="compass"></ion-icon> O vento sopra na direção {{deg}}
+      </p>
+    </ion-item>
+    <ion-card>
+      <ion-card-header>
+         <ion-icon color='primary' name="information-circle">       
+         </ion-icon> Sugestão KITE
+      </ion-card-header>
+      <ion-card-content>    
+        {{message}}
+      </ion-card-content>
+    </ion-card>  
+  </div>
 
 </ion-card>
-
- <ion-infinite-scroll (ionInfinite)="loadInfo($event)">
-   <ion-infinite-scroll-content></ion-infinite-scroll-content>
- </ion-infinite-scroll>
-
-    <ion-card [hidden]='true'>
+    <ion-card *ngIf='isfirsttime'>
       <ion-card-header>
         <ion-icon color='danger' name="help-buoy"></ion-icon> Informativo
       </ion-card-header>
       <ion-card-content>
         Parece que não há nenhuma cidade ou localização adicionada aos seus favoritos, deseja adicionar alguma das cidades abaixo?
         <ion-slides pager>
-          <ion-slide>
-            <div style="height: 220px">
-              <img src="./assets/city.jpg" alt="">
-              <ion-item>
-              <ion-label color='primary' style='font-size: 15pt'>Santos</ion-label>
-              <ion-checkbox color="dark" checked="false"></ion-checkbox>
+        <ion-slide *ngFor="let s of slides">
+          <div style="height: 250px !important">
+            <img [src]="s.img" alt="" style='height: 190px !important'>
+            <ion-item>
+              <ion-label color='primary' style='font-size: 15pt'>{{s.nome}}</ion-label>
+              <ion-checkbox (ionChange)='check(s)' color="dark" [(ngModel)]='s.favorito'></ion-checkbox>
             </ion-item>
-            </div>
-          </ion-slide>        
-          <ion-slide>
-            <div style="height: 220px">
-              <img src="./assets/rio.jpg" alt="">
-              <ion-item>
-              <ion-label color='primary' style='font-size: 15pt'>Rio de Janeiro</ion-label>
-              <ion-checkbox color="dark" checked="false"></ion-checkbox>
-            </ion-item>
-            </div>
-          </ion-slide>
-          <ion-slide>
-            <div style="height: 220px">
-              <img src="./assets/saopaulo.jpg" alt="">
-              <ion-item>
-              <ion-label color='primary' style='font-size: 15pt'>São Paulo</ion-label>
-              <ion-checkbox color="dark" checked="false"></ion-checkbox>
-            </ion-item>
-            </div>
-          </ion-slide>
-          
-        </ion-slides>
-
-        <button ion-button block (click)='doSome()'>Call</button>
+          </div>
+        </ion-slide>          
+ 
+        </ion-slides>        
         </ion-card-content>
     </ion-card>
 </ion-content>

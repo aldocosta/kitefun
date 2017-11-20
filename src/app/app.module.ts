@@ -14,6 +14,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Geolocation } from '@ionic-native/geolocation';
 import { WeatherapiProvider } from '../providers/weatherapi/weatherapi';
+import { ConfigProvider } from '../providers/config/config';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { WeatherapiProvider } from '../providers/weatherapi/weatherapi';
     EstadoServices,    
     Geolocation,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    WeatherapiProvider
+    WeatherapiProvider,
+    ConfigProvider
   ]
 })
 export class AppModule {}

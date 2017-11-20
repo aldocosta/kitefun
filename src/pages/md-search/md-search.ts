@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController,
+         LoadingController } from 'ionic-angular';
 
 import { WeatherapiProvider } from '../../providers/weatherapi/weatherapi';
-
+import 'rxjs/add/operator/catch';
 
 /**
  * Generated class for the MdSearchPage page.
@@ -22,30 +23,30 @@ export class MdSearchPage {
   valor: String;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public viewCtrl: ViewController,
-    private wapi: WeatherapiProvider
+    private wapi: WeatherapiProvider,public loadingCtrl: LoadingController
     ) {
     
   }
 
   ionViewDidLoad() {
-    this.items.push('São Paulo');
-    this.items.push('Santos');
-    this.items.push('São Vicente');
-    this.items.push('Guaruja');
-    this.items.push('Peruibe');
-    this.items.push('Mongagua');
-      
     
   }
 
   inputEvent(e){
+    let loading = this.loadingCtrl.create({
+      content: 'Pesquisando...',
+      duration:1500
+    });
+
+    loading.present();
     let _tmp = e.target.value;
-    if(_tmp!=''){
-      let tmp = this.items.filter(function(e){ return e.indexOf(_tmp)>-1});
-      this.itemsFilter = tmp;    
-    }else{
+    this.wapi.getapiCities(_tmp).subscribe(ret=>{      
       this.itemsFilter = [];
-    }
+      this.itemsFilter.push(ret);
+      //loading.dismiss();
+    });
+
+    
   }
 
   dismiss() {
@@ -53,3 +54,4 @@ export class MdSearchPage {
   }
 
 }
+ 

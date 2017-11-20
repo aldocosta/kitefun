@@ -5,6 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
+import { ConfigProvider } from '../providers/config/config';
 
 
 
@@ -17,8 +18,13 @@ export class MyApp {
   rootPage: any = HomePage;
 
   pages: Array<{title: string, component: any}>;
+  config: {
+      cidades:Array<{nome:string,favorito:boolean,urlapi:string}>
+  }
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
+              private conf: ConfigProvider) {
+
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -27,15 +33,27 @@ export class MyApp {
       { title: 'List', component: ListPage }
     ];
 
+    
+
   }
 
   initializeApp() {
-    this.platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
-    });
+    this.conf.retornarConfig('configuracoes').then((data)=>{
+        /*if(data){
+          this.config = data as { cidades:Array<{nome:string,favorito:boolean,urlapi:string}> };          
+          console.log(this.config);          
+        }*/
+      }).catch((data)=>{
+        this.config = {cidades:[{nome:'',favorito:false,urlapi:''}]};
+        this.conf.gravarConfig('configuracoes',JSON.stringify(this.config));
+      }).then(()=>{
+        this.platform.ready().then(() => {
+          // Okay, so the platform is ready and our plugins are available.
+          // Here you can do any higher level native things you might need.
+          this.statusBar.styleDefault();
+          this.splashScreen.hide();    
+        });
+    });      
   }
 
   openPage(page) {

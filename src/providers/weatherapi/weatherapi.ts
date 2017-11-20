@@ -13,8 +13,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class WeatherapiProvider {
 
-  constructor(public http: Http) {
-    console.log('Hello WeatherapiProvider Provider');
+  constructor(public http: Http) {    
   }
 
   public getapilat_lon(lat,lon){
@@ -25,10 +24,35 @@ export class WeatherapiProvider {
        headers: headers
     });
 
-    //return this.http.get('http://aldocosta-com-br.umbler.net/api/latlon/-23.9609/-46.3337',options).map(res => res.json());
-//    return this.http.get('http://aldocosta-com-br.umbler.net/api/latlon/'+lat+'/'+lon+'',options).map(res => res.json());
-return this.http.get('http://aldocosta-com-br.umbler.net/api/latlon/'+lat+'/'+lon+'',options).map(res => res.json());
-  	
+    let path = 'http://192.168.0.103:3000/api/kite/latlon/'+lat+'/'+lon;
+    let path2 = 'http://aldocosta.com.br/api/kite/latlon/'+lat+'/'+lon;
+
+    return this.http.get(path2,options).map(res => res.json());  	
+  }
+
+  public getapiflickr_lat_lon(lat,lon){
+    //lat ='-23.8679702'; lon = '-46.4790072';
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+  	let options = new RequestOptions(
+    {
+       headers: headers
+    });
+    let pathimg ="http://aldocosta.com.br/api/flickr/kiteapi/latlon/"+lat+"/"+lon;
+    return this.http.get(pathimg,options).map(res => res.json());  	
+  }
+
+  public getapiCities(cityname){
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+  	let options = new RequestOptions(
+    {
+       headers: headers
+    });  
+    
+    let path = 'http://aldocosta.com.br/api/kite/cidade/'+cityname;
+    let path2 = 'http://localhost:3000/api/kite/cidade/'+cityname;
+    
+    return this.http.get(path,options).map(res => res.json());  	
+
   }
 
 }
