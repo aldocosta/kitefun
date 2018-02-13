@@ -8,12 +8,31 @@
 </ion-header>
 <ion-content>
   <ion-fab top right edge>
-    <button ion-fab mini (click)='showModalSearchCities()'><ion-icon name="add"></ion-icon></button>
+    <!-- <button ion-fab mini (click)='showModalSearchCities()'><ion-icon name="add"></ion-icon></button> -->
+    <button ion-fab mini><ion-icon name="add"></ion-icon></button>
+    <ion-fab-list>
+      <button ion-fab (click)='showModalSearchCities()'>        
+        <ion-icon name="search"></ion-icon>
+      </button>
+      <button ion-fab (click)='tapevent($event)'>        
+        <ion-icon name="locate"></ion-icon>
+        </button>
+      <button ion-fab>        
+        <ion-icon name="bookmark" (click)='favoritarItem()'></ion-icon>
+      </button>
+      <button ion-fab>
+        <ion-icon name="add"></ion-icon>
+        <!-- <ion-icon name="logo-googleplus"></ion-icon> -->
+      </button>
+    </ion-fab-list>
   </ion-fab>
 <ion-card>
-  <div *ngIf='!isfirsttime' (tap)='tapevent($event)'>
-    <img [src]="urlimg">
-    <ion-badge item-end>{{cidade}}</ion-badge>
+  <!-- <div *ngIf='!isfirsttime' (tap)='tapevent($event)'> -->
+      <div *ngIf='!isfirsttime'>
+    <img [src]="urlimg" style="height: 400px">
+    <ion-badge item-end>{{cidade}}        
+    </ion-badge>
+    <ion-icon name="bookmark" [hidden]='!flag' color='secondary' item-start large></ion-icon>
     <ion-item>
       <ion-icon name="" item-start large>
         <img [src]="urlicon" alt="" style='width: 30px;'>      
@@ -46,8 +65,9 @@
         <ion-icon color='danger' name="help-buoy"></ion-icon> Informativo
       </ion-card-header>
       <ion-card-content>
-        Parece que não há nenhuma cidade ou localização adicionada aos seus favoritos, deseja adicionar alguma das cidades abaixo?
-        <ion-slides pager>
+        Parece que não há nenhuma cidade ou localização adicionada aos seus favoritos, deseja adicionar alguma
+        cidades? Clique no icone de "mais" no topo acima.        
+        <!-- <ion-slides pager>
         <ion-slide *ngFor="let s of slides">
           <div style="height: 250px !important">
             <img [src]="s.img" alt="" style='height: 190px !important'>
@@ -58,7 +78,7 @@
           </div>
         </ion-slide>          
  
-        </ion-slides>        
+        </ion-slides>         -->
         </ion-card-content>
     </ion-card>
 </ion-content>

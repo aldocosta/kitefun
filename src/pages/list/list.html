@@ -3,17 +3,18 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>List</ion-title>
+    <ion-title>Favoritos</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
   <ion-list>
     <button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">
-      <ion-icon [name]="item.icon" item-start></ion-icon>
-      {{item.title}}
+      <ion-icon name="bookmark" item-start></ion-icon>      
+      {{item.cidade}} 
+      <ion-icon [hidden]='!item.favorito' name="ios-checkmark-circle"></ion-icon>
       <div class="item-note" item-end>
-        {{item.note}}
+        <!-- {{item.note}} -->
       </div>
     </button>
   </ion-list>
