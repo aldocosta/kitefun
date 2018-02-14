@@ -1,6 +1,6 @@
 {
   "name": "pipa",
-  "app_id": "",
+  "app_id": "85ac4c36",
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}
