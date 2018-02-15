@@ -28,7 +28,7 @@
   </ion-fab>
 <ion-card>
   <!-- <div *ngIf='!isfirsttime' (tap)='tapevent($event)'> -->
-      <div *ngIf='!isfirsttime'>
+      <div *ngIf='!isfirsttime' (tap)='loadFavoritos()'>
     <img src="./assets/Flickr.png" style="position:absolute;top:20px;left:10px;width:10%" alt="">
     <img [src]="urlimg" style="height: 275px">
     <ion-badge item-end>{{cidade}}        

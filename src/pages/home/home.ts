@@ -135,7 +135,10 @@ export class HomePage implements OnInit {
           this.wapi.getapiflickr_lat_lon(ret.lat,ret.lon).subscribe(ret=>{
             this.urlimg = ret.source;        
           });          
-        });        
+        },err=>{
+          loading.dismiss();
+          console.log(err);
+        });
       }else{
         loading.dismiss();
       }
@@ -204,8 +207,9 @@ export class HomePage implements OnInit {
         obj.lat = '';
         obj.cidade = this.cidade;
         obj.favorito = true;        
+        fav.push(obj);
       }
-      //fav.push(obj);
+      
       this.ls.saveItem('favoritos',fav);      
 
       let alert = this.alertCtrl.create({
@@ -214,30 +218,12 @@ export class HomePage implements OnInit {
         buttons: ['OK']
       });
       alert.present();          
-
-      // if(ret <= -1){
-      //   let obj = {
-      //     lon:'',
-      //     lat:'',
-      //     cidade:this.cidade,
-      //     favorito:true
-      //   }    
-      //   fav.push(obj);
-      //   this.ls.saveItem('favoritos',fav);
-      //   let alert = this.alertCtrl.create({
-      //     title: 'Novo Item!',
-      //     subTitle: 'Uma nova cidade foi adicionada através de sua localização',
-      //     buttons: ['OK']
-      //   });
-      //   alert.present();    
-      // }else{
-      //   let alert = this.alertCtrl.create({
-      //     title: 'Novo Item!',
-      //     subTitle: 'Item já existe',
-      //     buttons: ['OK']
-      //   });
-      //   alert.present();    
-      // }
     }
   }
+
+  // refresh(){
+  //   if(this.selectedItem){
+
+  //   }
+  // }
 }
